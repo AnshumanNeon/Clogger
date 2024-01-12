@@ -2,5 +2,5 @@
 
 int main()
 {
-	print("hello {} {}", "hjeajkw", "aksnakjn");
+	print("hello {:s} {:d}", "hjeajkw", 58);
 }
