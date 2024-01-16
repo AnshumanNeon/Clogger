@@ -11,22 +11,25 @@ int is_short(const char* format)
     return ( *format == 'h' && *(format + 1) == 'i' );                         
 }                                                                              
 
-void print_by_type(va_list args, const char* format)                           
-{                                                                              
+int get_type(const char* format)                           
+{
     if(*format == 'd' || is_long(format) || is_short(format) || *format == 'f')
-    {                                                                          
-        format++;                                                              
-        if(*format == '}')                                                     
-        {                                                                      
-            printf("%ld", va_arg(args, long));                                                   
-        }                                                                      
+    {
+        if(is_long(format) || is_short(format))
+        {
+            return 2;
+        }
+        else
+        {
+            return 1;
+        } 
     }                                                                          
     if(*format == 's')                                                         
-    {                                                                          
-        format++;                                                              
-        if(*format == '}')                                                     
-        {
-            printf("%s", va_arg(args, char*));                                                  
-        }                                                                      
+    {           
+        return 0;
     }
-}                                                                              
+    else
+    {
+        return -1;
+    }
+}

@@ -15,11 +15,31 @@ void print(const char* format, ...)
 			{
 				printf("%s", va_arg(args, char*));
 			}
-            if(*format == ':')
-            {
-                format++;
-                print_by_type(args, format);
-            }
+      if(*format == ':')
+      {
+        format++;
+        int type = get_type(format);
+      	format++;
+      	if(type > 1)
+      	{
+      		format++;
+      	}
+      	if(*format == '}')
+      	{
+      		if(type > 0)
+      		{
+      			printf("%ld", va_arg(args, long));
+      		}
+      		else
+      		{
+      			printf("%s", va_arg(args, char*));
+      		}
+      	}
+      	else
+      	{
+      		printf("ERROR! please close the brackets immediately after specifying the type.");
+      	}
+      }
 		}
 		else
 		{
@@ -27,6 +47,7 @@ void print(const char* format, ...)
 		}
 		format++;
 	}
-    printf("\n");
+  
+  printf("\n");
 	va_end(args);
 }
